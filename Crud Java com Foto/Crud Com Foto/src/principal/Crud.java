@@ -97,6 +97,11 @@ public class Crud extends javax.swing.JFrame {
         jButton1.setBorderPainted(false);
         jButton1.setFocusPainted(false);
         jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
@@ -411,6 +416,37 @@ public class Crud extends javax.swing.JFrame {
         e.printStackTrace();
     }
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int fila = tabla.getSelectedRow();
+
+        Formulario_Exibir f = new Formulario_Exibir(this, true);
+        f.txtNome.setText(tabla.getValueAt(fila, 1).toString());
+        f.txtUsuario.setText(tabla.getValueAt(fila, 2).toString());
+        f.txtSenha.setText(tabla.getValueAt(fila, 3).toString());
+        f.txtEndereco.setText(tabla.getValueAt(fila, 4).toString());
+        f.txtTelefone.setText(tabla.getValueAt(fila, 5).toString());
+           
+        
+        int id = Integer.parseInt(tabla.getValueAt(fila, 0).toString()); // Supondo que o ID esteja na coluna 0
+        byte[] fotoBytes = recuperarFotoDoBancoDeDados(id); // Método para recuperar a foto do banco de dados
+        if (fotoBytes != null) {
+            ImageIcon imagem = new ImageIcon(fotoBytes);
+            // Redimensionar a imagem para caber no JLabel, se necessário
+            Image image = imagem.getImage();
+            Image novaImagem = image.getScaledInstance(f.lblFoto.getWidth(), f.lblFoto.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon imagemRedimensionada = new ImageIcon(novaImagem);
+            f.lblFoto.setIcon(imagemRedimensionada);
+        } else {
+            // Lidar com o caso em que a foto não foi encontrada
+            // Por exemplo, exibir uma imagem padrão ou uma mensagem de erro
+            f.lblFoto.setIcon(null);
+        }
+        
+        
+        f.lblid.setText(tabla.getValueAt(fila, 0).toString());
+        f.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
