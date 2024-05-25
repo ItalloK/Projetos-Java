@@ -5,6 +5,12 @@
 package principal;
 
 import javax.swing.JOptionPane;
+import java.awt.Image;
+import java.io.FileInputStream;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -151,6 +157,11 @@ public class Formulario_Registro extends javax.swing.JDialog {
         btnCarregarFoto.setToolTipText("CARREGAR FOTO");
         btnCarregarFoto.setFocusPainted(false);
         btnCarregarFoto.setFocusable(false);
+        btnCarregarFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarregarFotoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,6 +240,24 @@ public class Formulario_Registro extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void carregarfoto(){
+        JFileChooser jfc = new JFileChooser();
+        jfc.setDialogTitle("Selecionar Arquivo");
+        jfc.setFileFilter(new FileNameExtensionFilter("Arquivo de Imagens (*.PNG,*.JPG,*.JPEG)","png","jpg","jpeg"));
+        int resultado = jfc.showOpenDialog(this);
+        if(resultado  == JFileChooser.APPROVE_OPTION){
+            try{
+                Funciones.fis = new FileInputStream(jfc.getSelectedFile());
+                Funciones.tamanho = (int) jfc.getSelectedFile().length();
+                Image foto = ImageIO.read(jfc.getSelectedFile()).getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH);
+                lblFoto.setIcon(new ImageIcon(foto));
+                lblFoto.updateUI();
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        }          
+    }
+    
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         
@@ -259,6 +288,10 @@ public class Formulario_Registro extends javax.swing.JDialog {
         }
         
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnCarregarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarFotoActionPerformed
+        carregarfoto();
+    }//GEN-LAST:event_btnCarregarFotoActionPerformed
 
     /**
      * @param args the command line arguments

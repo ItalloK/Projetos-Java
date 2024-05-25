@@ -32,7 +32,8 @@ public class Sentencias {
     private String Idade;
     private String Endereco;
     private String Telefone;
-
+    private byte[] Foto;
+    
     public String getId() {
         return Id;
     }
@@ -81,7 +82,13 @@ public class Sentencias {
         this.Telefone = Telefone;
     }
     
-    
+    public byte[] getFoto() {
+        return Foto;
+    }
+
+    public void setFoto(byte[] Foto) {
+        this.Foto = Foto;
+    }
     
     
 }

@@ -1,6 +1,7 @@
 package principal;
 
 import Conexao.Conexao;
+import java.io.FileInputStream;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +17,9 @@ public class Funciones {
     private static Connection connection = conexao.getConexao(); 
     private static PreparedStatement ps = null;
     
+    static FileInputStream fis;
+    public static int tamanho;//variavel global para armazenar tamanho da imagem. ( em bytes )
+    
     public static boolean isRegister(Sentencias s) {
         String sql = Sentencias.REGISTRAR;
         try {
@@ -25,6 +29,7 @@ public class Funciones {
             ps.setString(3, s.getIdade());
             ps.setString(4, s.getEndereco());
             ps.setString(5, s.getTelefone());
+            ps.setBlob(6, fis, tamanho);        
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -43,8 +48,7 @@ public class Funciones {
             ps.setString(4, s.getEndereco());
             ps.setString(5, s.getTelefone());
             ps.setString(6, s.getId());
-            
-            
+            ps.setBlob(7, fis, tamanho);
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
