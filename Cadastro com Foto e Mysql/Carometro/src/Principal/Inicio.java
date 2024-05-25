@@ -58,8 +58,10 @@ public class Inicio extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lblStatus = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
+        btnLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -89,7 +91,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Principal/00fecf92f9091b93a3a4fb2fd2ec1be9.jpg"))); // NOI18N
+        lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Principal/FotoPadrao.png"))); // NOI18N
         lblFoto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         lblFoto.setMaximumSize(new java.awt.Dimension(256, 256));
         lblFoto.setMinimumSize(new java.awt.Dimension(256, 256));
@@ -148,6 +150,19 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Principal/Clear.png"))); // NOI18N
+        btnLimpar.setToolTipText("ADICIONAR");
+        btnLimpar.setBorderPainted(false);
+        btnLimpar.setFocusPainted(false);
+        btnLimpar.setMaximumSize(new java.awt.Dimension(64, 64));
+        btnLimpar.setMinimumSize(new java.awt.Dimension(64, 64));
+        btnLimpar.setPreferredSize(new java.awt.Dimension(64, 64));
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,9 +170,12 @@ public class Inicio extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
-                    .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -181,7 +199,8 @@ public class Inicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -201,6 +220,10 @@ public class Inicio extends javax.swing.JFrame {
         status();
         SetarData();
     }//GEN-LAST:event_formWindowActivated
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        Reset();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,6 +304,8 @@ public class Inicio extends javax.swing.JFrame {
         if(txtNome.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Preencha o Nome");
             txtNome.requestFocus();
+        } else if (fis == null) {
+            JOptionPane.showMessageDialog(null, "Por favor, carregue uma foto antes de adicionar.");
         }else{
             String insert = "insert into alunos(nome,foto) values(?,?)";
             try {
@@ -291,6 +316,7 @@ public class Inicio extends javax.swing.JFrame {
                 int confirma = pst.executeUpdate();
                 if(confirma == 1){
                     JOptionPane.showMessageDialog(null, "Aluno(a) cadastrado com sucesso.");
+                    Reset();
                 }else{
                     JOptionPane.showMessageDialog(null, "Erro ao cadastrar Aluno(a).");
                 }
@@ -299,14 +325,20 @@ public class Inicio extends javax.swing.JFrame {
                 System.out.println(e);
             }
         }
-        
-        
+    }
+    
+    private void Reset(){
+        txtNome.setText(null);
+        lblFoto.setIcon(new ImageIcon(Inicio.class.getResource("/Principal/FotoPadrao.png")));
+        fis = null;
+        txtNome.requestFocus();
     }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnCarregar;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
