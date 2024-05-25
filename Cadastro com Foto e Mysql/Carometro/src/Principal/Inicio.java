@@ -69,6 +69,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtRa = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        btnAdicionar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -138,6 +139,11 @@ public class Inicio extends javax.swing.JFrame {
 
         lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Principal/32Vermelho.png"))); // NOI18N
         lblStatus.setToolTipText("STATUS SERVIDOR");
+        if (con == null) {
+            lblStatus.setToolTipText("SERVIDOR ONLINE");
+        } else {
+            lblStatus.setToolTipText("SERVIDOR OFFLINE");
+        }
 
         lblData.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -163,7 +169,7 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Principal/Clear.png"))); // NOI18N
-        btnLimpar.setToolTipText("ADICIONAR");
+        btnLimpar.setToolTipText("LIMPAR");
         btnLimpar.setBorderPainted(false);
         btnLimpar.setFocusPainted(false);
         btnLimpar.setMaximumSize(new java.awt.Dimension(64, 64));
@@ -194,6 +200,19 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        btnAdicionar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Principal/Atualizar.png"))); // NOI18N
+        btnAdicionar1.setToolTipText("ATUALIZAR");
+        btnAdicionar1.setBorderPainted(false);
+        btnAdicionar1.setFocusPainted(false);
+        btnAdicionar1.setMaximumSize(new java.awt.Dimension(64, 64));
+        btnAdicionar1.setMinimumSize(new java.awt.Dimension(64, 64));
+        btnAdicionar1.setPreferredSize(new java.awt.Dimension(64, 64));
+        btnAdicionar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -203,9 +222,11 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnAdicionar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94)
                         .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                     .addComponent(jLabel3)
@@ -242,10 +263,16 @@ public class Inicio extends javax.swing.JFrame {
                         .addGap(85, 85, 85)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAdicionar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -280,6 +307,10 @@ public class Inicio extends javax.swing.JFrame {
                 evt.consume();
             }
     }//GEN-LAST:event_txtRaKeyTyped
+
+    private void btnAdicionar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionar1ActionPerformed
+        Editar();
+    }//GEN-LAST:event_btnAdicionar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -383,6 +414,34 @@ public class Inicio extends javax.swing.JFrame {
         }
     }
     
+    private void Editar(){
+        if(txtNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha o Nome");
+            txtNome.requestFocus();
+        } else if (fis == null) {
+            JOptionPane.showMessageDialog(null, "Por favor, carregue uma foto antes de adicionar.");
+        }else{
+            String update = "update alunos SET nome = ? ,foto = ? where ra = ?";
+            try {
+                con = dao.conectar();
+                pst = con.prepareStatement(update);
+                pst.setString(1, txtNome.getText());
+                pst.setBlob(2, fis, tamanho);
+                pst.setString(3, txtRa.getText());
+                int confirma = pst.executeUpdate();
+                if(confirma == 1){
+                    JOptionPane.showMessageDialog(null, "Dados do(a) Aluno(a) alterados com sucesso.");
+                    Reset();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Erro ao Atualizar dados do(a) Aluno(a).");
+                }
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+    
     private void BuscaRA(){
         if(txtRa.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Digite o RA.");
@@ -409,6 +468,7 @@ public class Inicio extends javax.swing.JFrame {
                     lblFoto.setIcon(foto);
                 } else {
                     JOptionPane.showMessageDialog(null, "Aluno(a) não encontrado.");
+                    Reset();
                 }
                 con.close();
             } catch (Exception e) {
@@ -419,6 +479,7 @@ public class Inicio extends javax.swing.JFrame {
     
     private void Reset(){
         txtNome.setText(null);
+        txtRa.setText(null);
         lblFoto.setIcon(new ImageIcon(Inicio.class.getResource("/Principal/FotoPadrao.png")));
         fis = null;
         txtNome.requestFocus();
@@ -427,6 +488,7 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnAdicionar1;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCarregar;
     private javax.swing.JButton btnLimpar;
