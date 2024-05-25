@@ -10,11 +10,17 @@ import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.net.URI;
 import java.sql.ResultSet;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import static principal.Formulario_Update.lblFoto;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 /**
  *
  * @author itall
@@ -286,11 +292,79 @@ public class Crud extends javax.swing.JFrame {
         f.txtSenha.setText(tabla.getValueAt(fila, 3).toString());
         f.txtEndereco.setText(tabla.getValueAt(fila, 4).toString());
         f.txtTelefone.setText(tabla.getValueAt(fila, 5).toString());
+           
+        
+        int id = Integer.parseInt(tabla.getValueAt(fila, 0).toString()); // Supondo que o ID esteja na coluna 0
+        byte[] fotoBytes = recuperarFotoDoBancoDeDados(id); // Método para recuperar a foto do banco de dados
+        if (fotoBytes != null) {
+            ImageIcon imagem = new ImageIcon(fotoBytes);
+            // Redimensionar a imagem para caber no JLabel, se necessário
+            Image image = imagem.getImage();
+            Image novaImagem = image.getScaledInstance(f.lblFoto.getWidth(), f.lblFoto.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon imagemRedimensionada = new ImageIcon(novaImagem);
+            f.lblFoto.setIcon(imagemRedimensionada);
+        } else {
+            // Lidar com o caso em que a foto não foi encontrada
+            // Por exemplo, exibir uma imagem padrão ou uma mensagem de erro
+            f.lblFoto.setIcon(null);
+        }
+        
         
         f.lblid.setText(tabla.getValueAt(fila, 0).toString());
         f.setVisible(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    
+    public byte[] recuperarFotoDoBancoDeDados(int id) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Estabelecer a conexão com o banco de dados
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/crud_javaphoto", "root", "root");
+
+            // Consulta SQL para recuperar a foto com base no ID
+            String sql = "SELECT Foto FROM usuarios WHERE id = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+
+            // Se a consulta retornar algum resultado
+            if (rs.next()) {
+                // Recuperar os dados da foto da coluna "foto"
+                byte[] fotoBytes = rs.getBytes("Foto");
+                return fotoBytes;
+            } else {
+                // Se não encontrar nenhuma foto com o ID especificado, retorne null
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Lidar com exceções adequadamente
+            return null;
+        } finally {
+            // Fechar conexões e recursos
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Lidar com exceções adequadamente
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int fila = tabla.getSelectedRow();
 
