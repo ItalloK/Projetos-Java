@@ -26,7 +26,7 @@ public class Conexao {
                     + "`Idade` VARCHAR(20) NULL DEFAULT NULL,"
                     + "`Endereco` VARCHAR(100) NULL DEFAULT NULL,"
                     + "`Telefone` VARCHAR(100) NULL DEFAULT NULL,"
-                    + "`foto` LONGBLOB NOT NULL,"
+                    + "`Foto` LONGBLOB NOT NULL,"
                     + "PRIMARY KEY (`id`)) "
                     + "ENGINE = InnoDB "
                     + "AUTO_INCREMENT = 9 "

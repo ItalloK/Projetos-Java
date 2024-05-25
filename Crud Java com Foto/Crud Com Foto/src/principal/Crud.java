@@ -4,16 +4,24 @@
  */
 package principal;
 
+import java.sql.Blob;
 import javax.swing.JOptionPane;
 import java.awt.Desktop;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.net.URI;
-
+import java.sql.ResultSet;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 /**
  *
  * @author itall
  */
 public class Crud extends javax.swing.JFrame {
 
+    private ResultSet rs;
     /**
      * Creates new form Crud
      */
@@ -278,8 +286,6 @@ public class Crud extends javax.swing.JFrame {
         f.txtSenha.setText(tabla.getValueAt(fila, 3).toString());
         f.txtEndereco.setText(tabla.getValueAt(fila, 4).toString());
         f.txtTelefone.setText(tabla.getValueAt(fila, 5).toString());
-        
-        //f.txtEndereco.setText(tabla.getValueAt(fila, 4).toString());
         
         f.lblid.setText(tabla.getValueAt(fila, 0).toString());
         f.setVisible(true);

@@ -4,6 +4,7 @@
  */
 package principal;
 
+import Conexao.Conexao;
 import java.awt.Image;
 import java.io.FileInputStream;
 import javax.imageio.ImageIO;
@@ -12,6 +13,14 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import static principal.Formulario_Registro.lblFoto;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,8 +28,12 @@ import static principal.Formulario_Registro.lblFoto;
  */
 public class Formulario_Update extends javax.swing.JDialog {
 
-    static FileInputStream fis;
-    public static int tamanho;//variavel global para armazenar tamanho da imagem. ( em bytes )
+    private Connection con;
+    private PreparedStatement pst;
+    private ResultSet rs;
+    private FileInputStream fis;
+    private int tamanho;//variavel global para armazenar tamanho da imagem. ( em bytes )
+
     /**
      * Creates new form Formulario
      */
@@ -28,20 +41,20 @@ public class Formulario_Update extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        
+
         setClean();
     }
 
-    public void setClean(){
+    public void setClean() {
         this.txtNome.setText("");
         this.txtSenha.setText("");
         this.txtUsuario.setText("");
         this.txtEndereco.setText("");
-        
+
         this.lblError.setText("");
         //this.lblid.setText(Funciones.extraerIDMAX());
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -380,35 +393,54 @@ public class Formulario_Update extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private static Connection conection = null;
+
+    public Connection getConexao() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conection = DriverManager.getConnection("jdbc:mysql://localhost/", "root", "root");
+
+            Statement statement = conection.createStatement();
+            conection = DriverManager.getConnection("jdbc:mysql://localhost/crud_javaphoto", "root", "root");
+            return conection;
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
         if (this.txtNome.getText().length() == 0 || this.txtSenha.getText().length() == 0
                 || this.txtUsuario.getText().length() == 0 || this.txtEndereco.getText().length() == 0
-                ) {
+                || fis == null) {
             this.lblError.setText("*TODOS OS CAMPOS SÃO OBRIGATÓRIOS*");
         } else {
-            
-            Sentencias s = new Sentencias();
-            
-            s.setId(this.lblid.getText());
-            s.setNome(this.txtNome.getText());
-            s.setEmail(this.txtUsuario.getText());
-            s.setIdade(this.txtSenha.getText());
-            s.setEndereco(this.txtEndereco.getText());
-            s.setTelefone(this.txtTelefone.getText());
-            
-            if (Funciones.isUpdate(s)) {
-                setClean();
-                Funciones.setListar("");
-                this.dispose();
-                JOptionPane.showMessageDialog(this, "Dados Atualizados com Sucesso.", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro ao Atualizar dados do Usuario.", "Erro", JOptionPane.ERROR_MESSAGE);
+            String update = "UPDATE usuarios SET Nome = ? ,Email = ?, Idade = ?, Endereco = ?, Telefone = ?, Foto = ? WHERE id = ?";
+            try {
+                con = getConexao();
+                pst = con.prepareStatement(update);
+                pst.setString(1, this.txtNome.getText());
+                pst.setString(2, this.txtUsuario.getText());
+                pst.setString(3, this.txtSenha.getText());
+                pst.setString(4, this.txtEndereco.getText());
+                pst.setString(5, this.txtTelefone.getText());
+                pst.setBlob(6, fis, tamanho);
+                pst.setString(7, this.lblid.getText());
+                int confirma = pst.executeUpdate();
+
+                if (confirma == 1) {
+                    setClean();
+                    Funciones.setListar("");
+                    this.dispose();
+                    JOptionPane.showMessageDialog(this, "Dados Atualizados com Sucesso.", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Erro ao Atualizar dados do Usuario.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
             }
-            
         }
-        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -422,24 +454,24 @@ public class Formulario_Update extends javax.swing.JDialog {
         carregarfoto();
     }//GEN-LAST:event_btnCarregarFotoActionPerformed
 
-    private void carregarfoto(){
+    private void carregarfoto() {
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Selecionar Arquivo");
-        jfc.setFileFilter(new FileNameExtensionFilter("Arquivo de Imagens (*.PNG,*.JPG,*.JPEG)","png","jpg","jpeg"));
+        jfc.setFileFilter(new FileNameExtensionFilter("Arquivo de Imagens (*.PNG,*.JPG,*.JPEG)", "png", "jpg", "jpeg"));
         int resultado = jfc.showOpenDialog(this);
-        if(resultado  == JFileChooser.APPROVE_OPTION){
-            try{
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            try {
                 fis = new FileInputStream(jfc.getSelectedFile());
                 tamanho = (int) jfc.getSelectedFile().length();
                 Image foto = ImageIO.read(jfc.getSelectedFile()).getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH);
                 lblFoto.setIcon(new ImageIcon(foto));
                 lblFoto.updateUI();
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println(e);
             }
-        }          
+        }
     }
-    
+
     /**
      * @param args the command line arguments
      */
