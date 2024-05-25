@@ -31,10 +31,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtNome" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
                   <Component id="btnAdicionar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNome" alignment="0" min="-2" pref="325" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="106" max="32767" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="lblFoto" max="32767" attributes="0"/>
                   <Component id="btnCarregar" max="32767" attributes="0"/>
@@ -213,15 +213,6 @@
               <Image iconType="3" name="/Principal/32Vermelho.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="STATUS SERVIDOR"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[32, 32]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[32, 32]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[32, 32]"/>
-            </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>

@@ -124,9 +124,6 @@ public class Inicio extends javax.swing.JFrame {
 
         lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Principal/32Vermelho.png"))); // NOI18N
         lblStatus.setToolTipText("STATUS SERVIDOR");
-        lblStatus.setMaximumSize(new java.awt.Dimension(32, 32));
-        lblStatus.setMinimumSize(new java.awt.Dimension(32, 32));
-        lblStatus.setPreferredSize(new java.awt.Dimension(32, 32));
 
         lblData.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -138,7 +135,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblStatus)
                 .addGap(32, 32, 32))
         );
         jPanel2Layout.setVerticalGroup(
@@ -160,9 +157,9 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                    .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCarregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -281,22 +278,28 @@ public class Inicio extends javax.swing.JFrame {
     }
     
     private void Adicionar(){
-        String insert = "insert into alunos(nome,foto) values(?,?)";
-        try {
-            con = dao.conectar();
-            pst = con.prepareStatement(insert);
-            pst.setString(1, txtNome.getText());
-            pst.setBlob(2, fis, tamanho);
-            int confirma = pst.executeUpdate();
-            if(confirma == 1){
-                JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso.");
-            }else{
-                JOptionPane.showMessageDialog(null, "Erro ao cadastrar Aluno.");
+        if(txtNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha o Nome");
+            txtNome.requestFocus();
+        }else{
+            String insert = "insert into alunos(nome,foto) values(?,?)";
+            try {
+                con = dao.conectar();
+                pst = con.prepareStatement(insert);
+                pst.setString(1, txtNome.getText());
+                pst.setBlob(2, fis, tamanho);
+                int confirma = pst.executeUpdate();
+                if(confirma == 1){
+                    JOptionPane.showMessageDialog(null, "Aluno(a) cadastrado com sucesso.");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar Aluno(a).");
+                }
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
             }
-            con.close();
-        } catch (Exception e) {
-            System.out.println(e);
         }
+        
         
     }
     
