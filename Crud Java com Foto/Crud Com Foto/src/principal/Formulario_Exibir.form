@@ -170,6 +170,7 @@
     <Component class="javax.swing.JTextField" name="txtNome">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="toolTipText" type="java.lang.String" value="NOME COMPLETO"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
@@ -179,6 +180,7 @@
     <Component class="javax.swing.JTextField" name="txtUsuario">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="toolTipText" type="java.lang.String" value="EMAIL"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
@@ -206,17 +208,17 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Digite o Nome Completo:"/>
+        <Property name="text" type="java.lang.String" value="Nome Completo:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Digite o Email:"/>
+        <Property name="text" type="java.lang.String" value="Email:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Digite a Data de Nascimento:"/>
+        <Property name="text" type="java.lang.String" value="Data de Nascimento:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtSenha">
@@ -225,6 +227,7 @@
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##/##/####" subtype="-1" type="5"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="DATA DE NASCIMENTO"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
@@ -233,12 +236,13 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Digite o Endere&#xe7;o:"/>
+        <Property name="text" type="java.lang.String" value="Endere&#xe7;o:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtEndereco">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" value="ENDERE&#xc7;O"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
@@ -247,7 +251,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Digite o Telefone:"/>
+        <Property name="text" type="java.lang.String" value="Telefone:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtTelefone">
@@ -256,6 +260,7 @@
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="(##) #####-####" subtype="-1" type="5"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="TELEFONE"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AuxValues>

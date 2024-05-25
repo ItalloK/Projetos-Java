@@ -82,6 +82,7 @@ public class Formulario_Registro extends javax.swing.JDialog {
         lblFoto = new javax.swing.JLabel();
         btnCarregarFoto = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        lblErroFoto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -182,6 +183,9 @@ public class Formulario_Registro extends javax.swing.JDialog {
 
         jLabel8.setText("ID:");
 
+        lblErroFoto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErroFoto.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -214,7 +218,8 @@ public class Formulario_Registro extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCarregarFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnCarregarFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblErroFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
@@ -255,7 +260,9 @@ public class Formulario_Registro extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCarregarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCarregarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblErroFoto)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -285,8 +292,10 @@ public class Formulario_Registro extends javax.swing.JDialog {
         
         if (this.txtNome.getText().length() == 0 || this.txtSenha.getText().length() == 0
                 || this.txtUsuario.getText().length() == 0 || this.txtEndereco.getText().length() == 0
-                || Funciones.fis == null) {
+                ) {
             this.lblError.setText("*TODOS OS CAMPOS SÃO OBRIGATÓRIOS*");
+        }else if(Funciones.fis == null){
+            this.lblErroFoto.setText("*VOCÊ TAMBEM DEVE SELECIONAR A FOTO*");
         } else {
             
             Sentencias s = new Sentencias();
@@ -372,6 +381,7 @@ public class Formulario_Registro extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblErroFoto;
     private javax.swing.JLabel lblError;
     public static javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblid;

@@ -117,9 +117,11 @@ public class Formulario_Exibir extends javax.swing.JDialog {
         );
 
         txtNome.setEditable(false);
+        txtNome.setToolTipText("NOME COMPLETO");
         txtNome.setFocusable(false);
 
         txtUsuario.setEditable(false);
+        txtUsuario.setToolTipText("EMAIL");
         txtUsuario.setFocusable(false);
 
         lblError.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -128,11 +130,11 @@ public class Formulario_Exibir extends javax.swing.JDialog {
 
         lblid.setText("ID");
 
-        jLabel2.setText("Digite o Nome Completo:");
+        jLabel2.setText("Nome Completo:");
 
-        jLabel3.setText("Digite o Email:");
+        jLabel3.setText("Email:");
 
-        jLabel4.setText("Digite a Data de Nascimento:");
+        jLabel4.setText("Data de Nascimento:");
 
         txtSenha.setEditable(false);
         try {
@@ -140,14 +142,16 @@ public class Formulario_Exibir extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtSenha.setToolTipText("DATA DE NASCIMENTO");
         txtSenha.setFocusable(false);
 
-        jLabel7.setText("Digite o Endereço:");
+        jLabel7.setText("Endereço:");
 
         txtEndereco.setEditable(false);
+        txtEndereco.setText("ENDEREÇO");
         txtEndereco.setFocusable(false);
 
-        jLabel5.setText("Digite o Telefone:");
+        jLabel5.setText("Telefone:");
 
         txtTelefone.setEditable(false);
         try {
@@ -155,6 +159,7 @@ public class Formulario_Exibir extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtTelefone.setToolTipText("TELEFONE");
         txtTelefone.setFocusable(false);
 
         lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/principal/FotoPadrao.png"))); // NOI18N
