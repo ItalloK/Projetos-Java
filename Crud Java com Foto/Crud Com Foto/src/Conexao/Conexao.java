@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Statement;
 
 public class Conexao {
     
@@ -12,7 +13,26 @@ public class Conexao {
     
     public Connection getConexao() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conection = DriverManager.getConnection("jdbc:mysql://localhost/", "root", "root");
+
+            Statement statement = conection.createStatement();
+            boolean databaseExists = statement.execute("CREATE SCHEMA IF NOT EXISTS `crud_javaphoto` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci");
+
+            boolean tableExists = statement.execute("CREATE TABLE IF NOT EXISTS `crud_javaphoto`.`usuarios` ("
+                    + "`id` INT NOT NULL AUTO_INCREMENT,"
+                    + "`Nome` VARCHAR(100) NULL DEFAULT NULL,"
+                    + "`Email` VARCHAR(100) NULL DEFAULT NULL,"
+                    + "`Idade` VARCHAR(20) NULL DEFAULT NULL,"
+                    + "`Endereco` VARCHAR(100) NULL DEFAULT NULL,"
+                    + "`Telefone` VARCHAR(100) NULL DEFAULT NULL,"
+                    + "`foto` LONGBLOB NOT NULL,"
+                    + "PRIMARY KEY (`id`)) "
+                    + "ENGINE = InnoDB "
+                    + "AUTO_INCREMENT = 9 "
+                    + "DEFAULT CHARACTER SET = utf8mb4 "
+                    + "COLLATE = utf8mb4_0900_ai_ci");
+            
             conection = DriverManager.getConnection("jdbc:mysql://localhost/crud_javaphoto", "root", "root");
             return conection;
         } catch (ClassNotFoundException | SQLException ex) {

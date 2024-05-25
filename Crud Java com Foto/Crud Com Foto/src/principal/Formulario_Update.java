@@ -4,7 +4,14 @@
  */
 package principal;
 
+import java.awt.Image;
+import java.io.FileInputStream;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import static principal.Formulario_Registro.lblFoto;
 
 /**
  *
@@ -12,6 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class Formulario_Update extends javax.swing.JDialog {
 
+    static FileInputStream fis;
+    public static int tamanho;//variavel global para armazenar tamanho da imagem. ( em bytes )
     /**
      * Creates new form Formulario
      */
@@ -291,6 +300,11 @@ public class Formulario_Update extends javax.swing.JDialog {
         btnCarregarFoto.setToolTipText("CARREGAR FOTO");
         btnCarregarFoto.setFocusPainted(false);
         btnCarregarFoto.setFocusable(false);
+        btnCarregarFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarregarFotoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -370,7 +384,8 @@ public class Formulario_Update extends javax.swing.JDialog {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         
         if (this.txtNome.getText().length() == 0 || this.txtSenha.getText().length() == 0
-                || this.txtUsuario.getText().length() == 0 || this.txtEndereco.getText().length() == 0) {
+                || this.txtUsuario.getText().length() == 0 || this.txtEndereco.getText().length() == 0
+                ) {
             this.lblError.setText("*TODOS OS CAMPOS SÃO OBRIGATÓRIOS*");
         } else {
             
@@ -401,33 +416,30 @@ public class Formulario_Update extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar1ActionPerformed
-
-        if (this.txtNome.getText().length() == 0 || this.txtSenha.getText().length() == 0
-            || this.txtUsuario.getText().length() == 0) {
-            this.lblError.setText("*TODOS OS CAMPOS SÃO OBRIGATÓRIOS*");
-        } else {
-
-            Sentencias s = new Sentencias();
-
-            s.setId(this.lblid.getText());
-            s.setNome(this.txtNome.getText());
-            s.setEmail(this.txtUsuario.getText());
-            s.setIdade(this.txtSenha.getText());
-            s.setEndereco(this.txtEndereco.getText());
-            s.setTelefone(this.txtTelefone.getText());
-            
-            if (Funciones.isRegister(s)) {
-                setClean();
-                Funciones.setListar("");
-                JOptionPane.showMessageDialog(this, "Usuario Registrado com Sucesso.", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro ao registrar Usuario.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-
-        }
-
     }//GEN-LAST:event_btnRegistrar1ActionPerformed
 
+    private void btnCarregarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarFotoActionPerformed
+        carregarfoto();
+    }//GEN-LAST:event_btnCarregarFotoActionPerformed
+
+    private void carregarfoto(){
+        JFileChooser jfc = new JFileChooser();
+        jfc.setDialogTitle("Selecionar Arquivo");
+        jfc.setFileFilter(new FileNameExtensionFilter("Arquivo de Imagens (*.PNG,*.JPG,*.JPEG)","png","jpg","jpeg"));
+        int resultado = jfc.showOpenDialog(this);
+        if(resultado  == JFileChooser.APPROVE_OPTION){
+            try{
+                fis = new FileInputStream(jfc.getSelectedFile());
+                tamanho = (int) jfc.getSelectedFile().length();
+                Image foto = ImageIO.read(jfc.getSelectedFile()).getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH);
+                lblFoto.setIcon(new ImageIcon(foto));
+                lblFoto.updateUI();
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        }          
+    }
+    
     /**
      * @param args the command line arguments
      */

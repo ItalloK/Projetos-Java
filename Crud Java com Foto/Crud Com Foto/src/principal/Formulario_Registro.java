@@ -11,6 +11,22 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.text.DateFormat;
+import java.sql.ResultSet;
+import java.sql.Blob;
+import javax.swing.Icon;
+import java.awt.Image;
+import java.io.FileInputStream;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+import java.util.Date;
 
 /**
  *
@@ -263,7 +279,7 @@ public class Formulario_Registro extends javax.swing.JDialog {
         
         if (this.txtNome.getText().length() == 0 || this.txtSenha.getText().length() == 0
                 || this.txtUsuario.getText().length() == 0 || this.txtEndereco.getText().length() == 0
-                ) {
+                || Funciones.fis == null) {
             this.lblError.setText("*TODOS OS CAMPOS SÃO OBRIGATÓRIOS*");
         } else {
             
@@ -276,7 +292,9 @@ public class Formulario_Registro extends javax.swing.JDialog {
             s.setEndereco(this.txtEndereco.getText());
             s.setTelefone(this.txtTelefone.getText());
             
+            
             if (Funciones.isRegister(s)) {
+                Funciones.fis = null;
                 setClean();
                 Funciones.setListar("");
                 this.dispose();

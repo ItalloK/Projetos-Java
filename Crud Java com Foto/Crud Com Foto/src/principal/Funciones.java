@@ -17,7 +17,7 @@ public class Funciones {
     private static Connection connection = conexao.getConexao(); 
     private static PreparedStatement ps = null;
     
-    static FileInputStream fis;
+    public static FileInputStream fis;
     public static int tamanho;//variavel global para armazenar tamanho da imagem. ( em bytes )
     
     public static boolean isRegister(Sentencias s) {
