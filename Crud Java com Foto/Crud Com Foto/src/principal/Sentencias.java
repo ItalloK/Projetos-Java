@@ -9,15 +9,17 @@ public class Sentencias {
             + "Email, "
             + "Idade, "
             + "Endereco, "
-            + "Telefone ) "
-            + "VALUES(?,?,?,?,?)";
+            + "Telefone, "
+            + "Foto ) "
+            + "VALUES(?,?,?,?,?,?)";
     
     public static String ATUALIZAR = "UPDATE usuarios SET "
             + "Nome = ?, "
             + "Email = ?, "
             + "Idade = ?, "
             + "Endereco = ?, "
-            + "Telefone = ? "
+            + "Telefone = ?, "
+            + "Foto = ? "
             + "WHERE id = ?";
     
     public static String ELIMINAR = "DELETE FROM usuarios WHERE id = ?";

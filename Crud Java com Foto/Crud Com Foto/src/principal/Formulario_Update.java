@@ -72,8 +72,8 @@ public class Formulario_Update extends javax.swing.JDialog {
         txtEndereco = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JFormattedTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lblFoto = new javax.swing.JLabel();
+        btnCarregarFoto = new javax.swing.JButton();
 
         jDialog1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jDialog1.setBackground(new java.awt.Color(255, 255, 255));
@@ -208,9 +208,7 @@ public class Formulario_Update extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(718, 550));
         setMinimumSize(new java.awt.Dimension(718, 550));
-        setPreferredSize(new java.awt.Dimension(718, 550));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
@@ -283,16 +281,16 @@ public class Formulario_Update extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/principal/FotoPadrao.png"))); // NOI18N
-        jLabel13.setToolTipText("FOTO DE PERFIL");
-        jLabel13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/principal/FotoPadrao.png"))); // NOI18N
+        lblFoto.setToolTipText("FOTO DE PERFIL");
+        lblFoto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 153, 255));
-        jButton1.setText("Carregar Foto");
-        jButton1.setToolTipText("CARREGAR FOTO");
-        jButton1.setFocusPainted(false);
-        jButton1.setFocusable(false);
+        btnCarregarFoto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCarregarFoto.setForeground(new java.awt.Color(51, 153, 255));
+        btnCarregarFoto.setText("Carregar Foto");
+        btnCarregarFoto.setToolTipText("CARREGAR FOTO");
+        btnCarregarFoto.setFocusPainted(false);
+        btnCarregarFoto.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -318,8 +316,8 @@ public class Formulario_Update extends javax.swing.JDialog {
                     .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCarregarFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -359,9 +357,9 @@ public class Formulario_Update extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblid))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCarregarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -476,16 +474,15 @@ public class Formulario_Update extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCarregarFoto;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRegistrar1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    public static javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -498,6 +495,7 @@ public class Formulario_Update extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblError;
     private javax.swing.JLabel lblError1;
+    public static javax.swing.JLabel lblFoto;
     public static javax.swing.JLabel lblid;
     private javax.swing.JLabel lblid1;
     public static javax.swing.JTextField txtEndereco;
