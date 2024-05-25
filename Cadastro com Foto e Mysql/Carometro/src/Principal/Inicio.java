@@ -17,7 +17,13 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import java.util.Date;
 import Conexao.DAO;
+import Utils.Validador;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.text.DateFormat;
+import java.sql.ResultSet;
+import java.sql.Blob;
+import javax.swing.Icon;
 /**
  *
  * @author itall
@@ -31,6 +37,7 @@ public class Inicio extends javax.swing.JFrame {
     DAO dao = new DAO();
     private Connection con;
     private PreparedStatement pst;
+    private ResultSet rs;
     
     /**
      * Creates new form Inicio
@@ -59,6 +66,9 @@ public class Inicio extends javax.swing.JFrame {
         lblStatus = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
         btnLimpar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtRa = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -120,6 +130,8 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        txtNome.setDocument(new Validador(30));
+
         jLabel2.setText("Digite o Nome:");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -136,7 +148,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addComponent(lblStatus)
                 .addGap(32, 32, 32))
         );
@@ -163,6 +175,25 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("RA:");
+
+        txtRa.setDocument(new Validador(6));
+        txtRa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRaKeyTyped(evt);
+            }
+        });
+
+        btnBuscar.setForeground(new java.awt.Color(51, 153, 255));
+        btnBuscar.setText("Buscar RA");
+        btnBuscar.setFocusPainted(false);
+        btnBuscar.setFocusable(false);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,8 +207,13 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtRa, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCarregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -188,10 +224,18 @@ public class Inicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                            .addComponent(txtRa))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,6 +252,7 @@ public class Inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
         carregarfoto();
     }//GEN-LAST:event_btnCarregarActionPerformed
@@ -224,6 +269,17 @@ public class Inicio extends javax.swing.JFrame {
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         Reset();
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        BuscaRA();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtRaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRaKeyTyped
+            String caracteres = "0123456789";
+            if(!caracteres.contains(evt.getKeyChar() + "")){
+                evt.consume();
+            }
+    }//GEN-LAST:event_txtRaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -327,6 +383,40 @@ public class Inicio extends javax.swing.JFrame {
         }
     }
     
+    private void BuscaRA(){
+        if(txtRa.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Digite o RA.");
+            txtRa.requestFocus();
+        }else{
+            String readRA = "select * from alunos where ra = ?";
+            try {
+                con = dao.conectar();
+                pst = con.prepareStatement(readRA);
+                pst.setString(1, txtRa.getText());
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                    txtNome.setText(rs.getString(2)); // Geta o campo 2 ( que é o Nome na tabela do sql )
+                    Blob blob = (Blob) rs.getBlob(3);
+                    byte[] img = blob.getBytes(1, (int) blob.length());
+                    BufferedImage imagem  = null;
+                    try {
+                        imagem = ImageIO.read(new ByteArrayInputStream(img));
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                    ImageIcon icone = new ImageIcon(imagem);
+                    Icon foto = new ImageIcon(icone.getImage().getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
+                    lblFoto.setIcon(foto);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aluno(a) não encontrado.");
+                }
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+    
     private void Reset(){
         txtNome.setText(null);
         lblFoto.setIcon(new ImageIcon(Inicio.class.getResource("/Principal/FotoPadrao.png")));
@@ -337,15 +427,18 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCarregar;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblFoto;
     public static javax.swing.JLabel lblStatus;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtRa;
     // End of variables declaration//GEN-END:variables
 }
