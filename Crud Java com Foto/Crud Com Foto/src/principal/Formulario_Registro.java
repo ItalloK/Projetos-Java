@@ -267,6 +267,7 @@ public class Formulario_Registro extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void carregarfoto(){

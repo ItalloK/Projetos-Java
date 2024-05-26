@@ -413,6 +413,7 @@ public class Formulario_Update extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private static Connection conection = null;
 
