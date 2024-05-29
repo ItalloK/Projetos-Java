@@ -120,6 +120,10 @@ public class Formulario_Registro extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        txtNome.setToolTipText("NOME COMPLETO");
+
+        txtUsuario.setToolTipText("EMAIL");
+
         btnRegistrar.setBackground(new java.awt.Color(0, 102, 255));
         btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,6 +143,7 @@ public class Formulario_Registro extends javax.swing.JDialog {
         lblError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         lblid.setText("ID");
+        lblid.setToolTipText("ID DO USUÁRIO");
 
         jLabel2.setText("Digite o Nome Completo:");
 
@@ -151,8 +156,11 @@ public class Formulario_Registro extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtSenha.setToolTipText("DATA DE NASCIMENTO");
 
         jLabel7.setText("Digite o Endereço:");
+
+        txtEndereco.setToolTipText("ENDEREÇO");
 
         jLabel5.setText("Digite o Telefone:");
 
@@ -161,6 +169,7 @@ public class Formulario_Registro extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtTelefone.setToolTipText("TELEFONE");
 
         lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/principal/FotoPadrao.png"))); // NOI18N
         lblFoto.setToolTipText("FOTO DE PERFIL");

@@ -129,6 +129,7 @@ public class Formulario_Exibir extends javax.swing.JDialog {
         lblError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         lblid.setText("ID");
+        lblid.setToolTipText("ID DO USUÁRIO");
 
         jLabel2.setText("Nome Completo:");
 
@@ -148,7 +149,7 @@ public class Formulario_Exibir extends javax.swing.JDialog {
         jLabel7.setText("Endereço:");
 
         txtEndereco.setEditable(false);
-        txtEndereco.setText("ENDEREÇO");
+        txtEndereco.setToolTipText("ENDEREÇO");
         txtEndereco.setFocusable(false);
 
         jLabel5.setText("Telefone:");

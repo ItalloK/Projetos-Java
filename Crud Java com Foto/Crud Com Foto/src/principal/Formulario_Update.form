@@ -395,11 +395,17 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="txtNome">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="NOME COMPLETO"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUsuario">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="EMAIL"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
@@ -438,6 +444,7 @@
     <Component class="javax.swing.JLabel" name="lblid">
       <Properties>
         <Property name="text" type="java.lang.String" value="ID"/>
+        <Property name="toolTipText" type="java.lang.String" value="ID DO USU&#xc1;RIO"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -463,6 +470,7 @@
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##/##/####" subtype="-1" type="5"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="DATA DE NASCIMENTO"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -474,6 +482,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtEndereco">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="ENDERE&#xc7;O"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
@@ -488,6 +499,7 @@
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="(##) #####-####" subtype="-1" type="5"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="TELEFONE"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
