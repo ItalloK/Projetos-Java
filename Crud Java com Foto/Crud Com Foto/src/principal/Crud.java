@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import static principal.Formulario_Update.lblFoto;
+import static principal.F_Update.lblFoto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.DriverManager;
@@ -182,7 +182,7 @@ public class Crud extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("CRUD - Atividade Ceuma ");
+        jLabel1.setText("CRUD - CEUMA ");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/principal/Icon SQL.png"))); // NOI18N
 
@@ -285,14 +285,14 @@ public class Crud extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_fecharActionPerformed
 
     private void btn_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novoActionPerformed
-        Formulario_Registro f = new Formulario_Registro(this, true);
+        F_Registro f = new F_Registro(this, true);
         f.setVisible(true);
     }//GEN-LAST:event_btn_novoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int fila = tabla.getSelectedRow();
 
-        Formulario_Update f = new Formulario_Update(this, true);
+        F_Update f = new F_Update(this, true);
         f.txtNome.setText(tabla.getValueAt(fila, 1).toString());
         f.txtUsuario.setText(tabla.getValueAt(fila, 2).toString());
         f.txtSenha.setText(tabla.getValueAt(fila, 3).toString());
@@ -421,7 +421,7 @@ public class Crud extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int fila = tabla.getSelectedRow();
 
-        Formulario_Exibir f = new Formulario_Exibir(this, true);
+        F_Exibir f = new F_Exibir(this, true);
         f.txtNome.setText(tabla.getValueAt(fila, 1).toString());
         f.txtUsuario.setText(tabla.getValueAt(fila, 2).toString());
         f.txtSenha.setText(tabla.getValueAt(fila, 3).toString());
