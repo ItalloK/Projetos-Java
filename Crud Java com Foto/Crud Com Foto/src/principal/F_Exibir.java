@@ -92,7 +92,7 @@ public class F_Exibir extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("PERFIL DO USUARIO");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/principal/Tela.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Exibir.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,7 +162,7 @@ public class F_Exibir extends javax.swing.JDialog {
         txtTelefone.setToolTipText("TELEFONE");
         txtTelefone.setFocusable(false);
 
-        lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/principal/FotoPadrao.png"))); // NOI18N
+        lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/FotoPadrao.png"))); // NOI18N
         lblFoto.setToolTipText("FOTO DE PERFIL");
         lblFoto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         lblFoto.setMaximumSize(new java.awt.Dimension(256, 256));

@@ -184,7 +184,7 @@ public class Crud extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("CRUD - CEUMA ");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/principal/Icon SQL.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Icon SQL.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
