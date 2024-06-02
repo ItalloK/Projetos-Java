@@ -33,7 +33,7 @@ public class Conexao {
                     + "DEFAULT CHARACTER SET = utf8mb4 "
                     + "COLLATE = utf8mb4_0900_ai_ci");
             
-            conection = DriverManager.getConnection("jdbc:mysql://localhost/crud_javaphoto", "root", "root");
+            conection = DriverManager.getConnection("jdbc:mysql://localhost/crud_javaphoto", "root", Global.SenhaBD);
             return conection;
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
