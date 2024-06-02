@@ -4,6 +4,7 @@
  */
 package principal;
 
+import Conexao.Global;
 import java.sql.Blob;
 import javax.swing.JOptionPane;
 import java.awt.Desktop;
@@ -328,7 +329,7 @@ public class Crud extends javax.swing.JFrame {
 
         try {
             // Estabelecer a conexão com o banco de dados
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/crud_javaphoto", "root", "root");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/crud_javaphoto", "root", Global.SenhaBD);
 
             // Consulta SQL para recuperar a foto com base no ID
             String sql = "SELECT Foto FROM usuarios WHERE id = ?";

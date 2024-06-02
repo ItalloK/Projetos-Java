@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Conexao.Global;
 
 /**
  *
@@ -283,10 +284,10 @@ public class F_Update extends javax.swing.JDialog {
     public Connection getConexao() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conection = DriverManager.getConnection("jdbc:mysql://localhost/", "root", "root");
+            conection = DriverManager.getConnection("jdbc:mysql://localhost/", "root", Global.SenhaBD);
 
             Statement statement = conection.createStatement();
-            conection = DriverManager.getConnection("jdbc:mysql://localhost/crud_javaphoto", "root", "root");
+            conection = DriverManager.getConnection("jdbc:mysql://localhost/crud_javaphoto", "root", Global.SenhaBD);
             return conection;
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);

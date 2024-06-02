@@ -14,7 +14,7 @@ public class Conexao {
     public Connection getConexao() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conection = DriverManager.getConnection("jdbc:mysql://localhost/", "root", "root");
+            conection = DriverManager.getConnection("jdbc:mysql://localhost/", "root", Global.SenhaBD);
 
             Statement statement = conection.createStatement();
             boolean databaseExists = statement.execute("CREATE SCHEMA IF NOT EXISTS `crud_javaphoto` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci");
